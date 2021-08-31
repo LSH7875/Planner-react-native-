@@ -1,0 +1,39 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.hpc">
+
+    <!-- 인터넷 사용 권한 설정-->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+      android:name=".MainApplication"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
+      android:allowBackup="false"
+      android:theme="@style/AppTheme">
+      <activity
+        android:allowBackup="true"
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+        android:launchMode="singleTask"
+        android:windowSoftInputMode="adjustResize">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <meta-data android:name="com.kakao.sdk.Appkey" android:value="@string/kakao_app_key" />
+      </activity>
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data android:host="oauth"
+                    android:scheme="kakao b5e74e5a2f7691fb9ff2fd44e91e2488" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
