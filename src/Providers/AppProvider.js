@@ -1,22 +1,23 @@
 // Context 와 useReducer 설정
 import React, { useReducer } from 'react';
 import createCtx from '../utils/createCtx';
+import reducer from './reducer';
 
 const [useCtx, Provider] = createCtx();
 const initialState = {
-  user: null,
+  DailyObject:null,//{id/object/priority/satus/startDate/endDate/objStartTime/objEndTime/Timelist/list}
+  Schedule:null,//{id/schedule/start/end/list/alram}
+  MonthlyObject:null,//{id/object/startMonth/endMonth/status/list/priority/specific/}
+  //specific:{start_week/end_week/object/satus/list/priority}
+  MonthlyDailyObject:null,//{}
+  Memo:null,//{id/subject/content/index/}
+  Project:null,//{id/project/start_date/end_date/status/satisfaction/list/specific/list/memo}
+  //sepcific:{specificObj/priority/startDate/endDate/status/memo}
+  screen:null//{}
+
 };
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'LOGIN':
-      return {
-        ...state,
-      };
-    default:
-      return state;
-  }
-};
+
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

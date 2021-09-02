@@ -1,3 +1,6 @@
+# react-native를 이용해 planner만들기
+---
+
 # 셋팅
 
 - ios <!-- 아이폰 개발환경 -->
@@ -13,4 +16,6 @@
       - RootStackNavigator.js <!-- stack navi 모음 -->
   App.js
 - index.js
+
+
 

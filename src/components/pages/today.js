@@ -1,5 +1,5 @@
 import React ,{useState,useEffect} from 'react';
-import { View, Text,TouchableOpacity , StyleSheet, SafeAreaView,FlatList,Button } from 'react-native';
+import { View, Text,TouchableOpacity , StyleSheet, SafeAreaView,FlatList,Button} from 'react-native';
 import { withScreen } from '../../utils/wrapper';
 import styled from 'styled-components/native';
 
@@ -7,9 +7,12 @@ import styled from 'styled-components/native';
 
 
 const Today = ({ navigation }) => {
+  console.log('sss')
   const [idx,setIdx]=useState(0);
   const initialState=[];
   const [state,setState]=useState(initialState);
+  const bbbb='aaaaa';
+  const [object,setObject] = useState(initialState);
 
   // useEffect(()=>{},[])
   
@@ -23,34 +26,77 @@ const timeStamp=()=>{
   // idx= idx==undefined?idx=0 :idx++;
   let d=  idx==0? Date.now() : state[idx-1].time;
   let a = Date.now();
-  let c = a-d; 
-  let b = {id:idx,time:a,minus:c};
+  let c = parseInt((a-d)/1000); 
+  let f = new Date().toLocaleDateString()
+  let e = new Date(f).getTime()/1000;
+  let b = {id:idx,time:a,minus:c,daytime:e};
+  
+
   // let b = {id:idx,time:a};
   setState(prev=>[...prev,b])
   setIdx(idx+1);
- 
+}
+
+const plusObject=()=>{
+  setObject(prev=>[...prev,'먹표'])
 }
 
 const renderMemo=({item})=>{
+ 
+    return(
+      
+      <View>
+        <Text style ={{backgroundColor:"blue",color:'white'}}>{item.idx}</Text>
+      </View>
+      
+    )
+  }
+
+
+const renderobject=({item})=>{
   return(
-    <View>
-      <Text style ={{backgroundColor:"blue",color:'white', flex:1}}>{item.minus}</Text>
+    <View style={{flex:1,flexDirection:'row'}}>
+      <Text style={{flex:8}}>{item}</Text>
+      <TouchableOpacity style ={{flex:2}}backgroundColor="red" onPress={()=>timeStamp()}>
+        <Text style={{}}>시작</Text>
+      </TouchableOpacity>
     </View>
   )
 }
   return (
     
-    <View>
-      <Aaa onPress={()=>navigation.navigate('Home')}>
-        <Text>홈으로</Text>
-      </Aaa>
-      <Button backgroundColor="red" title="시간측정" onPress={()=>timeStamp()}/>
-     
-        
-     
-      <View>
-        <FlatList data={state} renderItem={renderMemo} style = {{backgroundColor:'green'}}/>
+    <View style ={{flex:1, width:'100%', flexDirection:'column'}}>
+      <View style={{flex:2,backgroundColor:'pink'}}>
+        {/* <Aaa onPress={()=>navigation.navigate('Home')}><Text>홈으로</Text></Aaa> */}
+        <Text>이번주 목표</Text>
       </View>
+      <View style ={{flex:8, backgroundColor:'lightblue',flexDirection:'row'}}>
+      <View style ={{flex:1}}>
+        <Text>Today's todo list</Text>
+        <TouchableOpacity onPress={()=>plusObject()}><Text>+</Text></TouchableOpacity>
+        <FlatList data={object} renderItem={renderobject} />
+        
+        <Text>메모</Text>
+      </View>
+      <View style ={{flex:1,flexDirection:'row'}}>
+        <View style ={{flex:1,backgroundColor:"red"}}>
+
+        </View>
+        <View style ={{flex:5,backgroundColor:"purple"}}>
+          <Text style ={{backgroundColor:"red"}}>계획</Text>
+        </View>
+        <View style = {{flex:5, flexDirection:'column',backgroundColor:"white"}}>
+          <Text style ={{backgroundColor:"red"}}>실제</Text>
+          <FlatList data={state} renderItem={renderMemo} />
+        </View> 
+        
+      
+      
+      
+      </View>
+     
+    
+    </View>
     </View>
     
     
