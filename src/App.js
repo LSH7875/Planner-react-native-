@@ -9,7 +9,7 @@ const App = () => {
 const ProviderWrapper = () => {
   return (
     <RootProvider>
-      <App />
+      <App/>
     </RootProvider>
   );
 };

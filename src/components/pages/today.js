@@ -2,20 +2,20 @@ import React ,{useState,useEffect} from 'react';
 import { View, Text,TouchableOpacity , StyleSheet, SafeAreaView,FlatList,Button} from 'react-native';
 import { withScreen } from '../../utils/wrapper';
 import styled from 'styled-components/native';
+import {useCtx} from '../../Providers/AppProvider';
 
-
-
+console.log("hello world!")
 
 const Today = ({ navigation }) => {
-  console.log('sss')
+  const {dispatch,state} = useCtx();
+  console.log(state)
+
   const [idx,setIdx]=useState(0);
   const initialState=[];
-  const [state,setState]=useState(initialState);
+  const [state1,setState1]=useState(initialState);
   const bbbb='aaaaa';
   const [object,setObject] = useState(initialState);
 
-  // useEffect(()=>{},[])
-  
   const Aaa = styled.TouchableOpacity`
       background-color: #fff000;
       flex:1;     
@@ -24,7 +24,7 @@ const Today = ({ navigation }) => {
     `
 const timeStamp=()=>{
   // idx= idx==undefined?idx=0 :idx++;
-  let d=  idx==0? Date.now() : state[idx-1].time;
+  let d=  idx==0? Date.now() : state1[idx-1].time;
   let a = Date.now();
   let c = parseInt((a-d)/1000); 
   let f = new Date().toLocaleDateString()
@@ -33,7 +33,7 @@ const timeStamp=()=>{
   
 
   // let b = {id:idx,time:a};
-  setState(prev=>[...prev,b])
+  setState1(prev=>[...prev,b])
   setIdx(idx+1);
 }
 
@@ -87,7 +87,7 @@ const renderobject=({item})=>{
         </View>
         <View style = {{flex:5, flexDirection:'column',backgroundColor:"white"}}>
           <Text style ={{backgroundColor:"red"}}>실제</Text>
-          <FlatList data={state} renderItem={renderMemo} />
+          <FlatList data={state1} renderItem={renderMemo} />
         </View> 
         
       
