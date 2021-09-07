@@ -1,9 +1,9 @@
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'LOGIN':
+        case 'PlusObject':
             return {
-            ...state,
-            };
+            ...state
+            }
         default:
             return state;
     }
