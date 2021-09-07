@@ -11,7 +11,7 @@ export const initialState = {
   Memo:null,//{id/subject/content/index/}
   Project:null,//{id/project/start_date/end_date/status/satisfaction/list/specific/list/memo}
   //sepcific:{specificObj/priority/startDate/endDate/status/memo}
-  screen:null//{}
+  screen:{popup:0,objectProceeding:null}//{popup/objectProceeding}
 
 };
 
