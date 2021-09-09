@@ -3,8 +3,10 @@ import { View, Text,TextInput,TouchableOpacity , StyleSheet, SafeAreaView,FlatLi
 import { withScreen } from '../../utils/wrapper';
 import styled from 'styled-components/native';
 import {useCtx} from '../../Providers/AppProvider';
-import InputObject from '../Object/InputObject';
+import InputObject from './InputObject';
 import EstimateTime from '../Object/EstimateTime';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 console.log("hello world!")
 
@@ -110,7 +112,6 @@ const Today = ({ navigation }) => {
   
   return (
     <>
-      <InputObject/>
       {/* <EstimateTime/> */}
       <View style ={{flex:1, width:'100%', flexDirection:'column'}}>
         <View style={{flex:2,backgroundColor:'pink'}}>
@@ -120,7 +121,7 @@ const Today = ({ navigation }) => {
         <View style ={{flex:8, backgroundColor:'white',flexDirection:'row'}}>
         <View style ={{flex:1}}>
           <Text>Today's todo list</Text>
-          <TouchableOpacity onPress={()=>plusObject()}><Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'lightblue',color:'white',fontWeight:'800'}}>추가하기</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('InputObject')}><Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'lightblue',color:'white',fontWeight:'800'}}>추가하기</Text></TouchableOpacity>
           <TouchableOpacity onPress={()=>timeStart()}><Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'red',color:'white',fontWeight:'800'}}>시작하기</Text></TouchableOpacity>
           <FlatList data={state.DailyObject} renderItem={renderobject} />
           <Text>메모</Text>

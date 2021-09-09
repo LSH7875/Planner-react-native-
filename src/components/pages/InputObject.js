@@ -1,10 +1,11 @@
 import React ,{useState,useEffect} from 'react';
 import { View, Text,TextInput,Button,TouchableOpacity} from 'react-native';
 // import {closePopup} from '../../actions/popup'
-
-
+import { withScreen } from '../../utils/wrapper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {useCtx} from '../../Providers/AppProvider';
-const InputObect=()=>{
+const InputObject=({ navigation })=>{
 
 
     const {dispatch,state} = useCtx();
@@ -13,15 +14,17 @@ const InputObect=()=>{
     const inputObjectPlus=()=>{
         dispatch({type:'ObjectPlus',payload:text})
         setText("")
+        navigation.goBack()
     }
 
 
     const closePopup=()=>{
         dispatch({type:'PopupClose'})
+        // navigation.push('Today')
+        navigation.goBack()
     }
     return(
-        state.screen.popup===1?
-        <View style = {{flex:1,width:'50%',height:'50%',position:'absolute',borderRadius:10,zIndex:5,border:1,backgroundColor:'#ececec',padding:'2%'}}>
+        <View style = {{flex:1,width:'100%',height:'100%',backgroundColor:'#ececec',padding:'2%'}}>
             <Text style={{width:'100%', borderBottomColor:'skyblue',borderBottomWidth:1, textAlign:'center', padding:10}}>목표를 입력하세요</Text>
             <TextInput
                 style={{borderRadius:0,height: '80%',flexShrink:1,width:'80%',marginRight:'auto',marginLeft:'auto'}}
@@ -39,8 +42,7 @@ const InputObect=()=>{
                 </TouchableOpacity>
             </View>
         </View>
-        :<></>
     )
 }
 
-export default InputObect;
+export default withScreen(InputObject);
