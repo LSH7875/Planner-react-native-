@@ -7,6 +7,7 @@ import { View, Text } from 'react-native';
 //pages
 import Home from '../pages/Home';
 import Today from '../pages/today';
+import InputObject from '../pages/InputObject';
 
 export const RootStackNavigationProps = StackNavigationProp;
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ const RootNavigator = () => {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} options={{ title: '헬로우월드' }} />
         <Stack.Screen name="Today" component={Today} options={{ title: '오늘의 일정' }}/>
+        <Stack.Screen name="InputObject" component={InputObject} options={{ title: '목표 추가하기' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
