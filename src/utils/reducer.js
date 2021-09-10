@@ -12,16 +12,16 @@ const reducer = (state, action) => {
             console.log('----------')
             console.log(state.DailyObject)
             console.log('----------')
-            
-            let dailyObject=(state.DailyObject===null)?[]:[...state.DailyObject] 
+            let f = new Date().toLocaleDateString()
+            let e = new Date(f).getTime()/1000;
+
+            let dailyObject=(state.DailyObject===null)?{}:{...state.DailyObject} 
 
             console.log(dailyObject)
-            if(dailyObject.length===0){
-                dailyObject.push({id:0,object:action.payload,priority:0,status:0,startDate:(new Date().toLocaleDateString()),endDate:(new Date().toLocaleDateString()),objStartTime:'오늘 시작시간으로',objEndTime:'오늘 끝나는 시간',Timelist:null,list:0})
+            if(dailyObject.f.length===0){
+                dailyObject.push({[`${f}`]:[{id:0,object:action.payload,priority:0,status:0,startDate:(new Date().toLocaleDateString()),endDate:(new Date().toLocaleDateString()),objStartTime:e,objEndTime:e,Timelist:null,list:0}]})
             }else{
-                console.log('dailyObject의 타입')
-                console.log(typeof dailyObject)
-                dailyObject.push({id:(state.DailyObject.length),object:action.payload,priority:0,status:0,startDate:(new Date().toLocaleDateString()),endDate:(new Date().toLocaleDateString()),objStartTime:'오늘 시작시간으로',objEndTime:'오늘 끝나는 시간',Timelist:null,list:0})
+                dailyObject.f.push({id:(state.DailyObject.f.length),object:action.payload,priority:0,status:0,startDate:(new Date().toLocaleDateString()),endDate:(new Date().toLocaleDateString()),objStartTime:e,objEndTime:e,Timelist:null,list:0})
             }
                     
             return {
