@@ -7,27 +7,30 @@ import InputObject from './InputObject';
 import EstimateTime from '../Object/EstimateTime';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {Picker} from '@react-native-picker/picker';
 
 console.log("hello world!")
 
 const Today = ({ navigation }) => {
   const {dispatch,state} = useCtx();
   console.log(state)
-
+  const [selectedLanguage, setSelectedLanguage] = useState();
 
   const [idx,setIdx]=useState(0);
   const initialState=[];
   const [state1,setState1]=useState(initialState);
   const bbbb='aaaaa';
   const [object,setObject] = useState(initialState);
-
-  const time = ()=>{
-    let timelist =[]
-    for(i=0;i<24;i++){
-      timelist.push(i)
-    }
-    return timelist
-  }
+  const time = ['',0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+  // const time = ()=>{
+  //   let timelist =[]
+  //   let number=0;
+  //   for(i=0;i<24;i++){
+  //     timelist.push(number);
+  //     number++;
+  //   }
+  //   return timelist
+  // }
 
   const Aaa = styled.TouchableOpacity`
       background-color: #fff000;
@@ -98,9 +101,11 @@ const Today = ({ navigation }) => {
     }
   }
   const renderTime = ({item})=>{
+    console.log('renderitme')
+    console.log({item})
     return (
       <View style = {{flex:1}}>
-        <Text>{item}</Text> 
+        <Text style ={{color:'white',textAlign:'right',}} >{item}</Text> 
       </View>
     )
   }
@@ -127,7 +132,7 @@ const Today = ({ navigation }) => {
           <Text>메모</Text>
         </View>
         <View style ={{flex:1,flexDirection:'row'}}>
-          <View style ={{flex:1,backgroundColor:"red",flexDirection:'column'}}>
+          <View style ={{flex:1,backgroundColor:"blue",flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
             <FlatList data={time} renderItem={renderTime}/>
           </View>
           <View style ={{flex:5,backgroundColor:"purple"}}>
