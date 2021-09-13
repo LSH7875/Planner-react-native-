@@ -11,7 +11,8 @@ export const initialState = {
   Memo:null,//{id/subject/content/index/}
   Project:null,//{id/project/start_date/end_date/status/satisfaction/list/specific/list/memo}
   //sepcific:{specificObj/priority/startDate/endDate/status/memo}
-  screen:{popup:0,objectProceeding:null}//{popup/objectProceeding/time}
+  screen:{popup:0,objectProceeding:null},//{popup/objectProceeding/time}
+  list:[{'직장':'#1e73be'},{'휴식':'#a9e87c'},{'자기계발':'#dd3333'},{'종교':'#bc87f1'},{'기타':'#f1dbbb'}]
 
 };
 
