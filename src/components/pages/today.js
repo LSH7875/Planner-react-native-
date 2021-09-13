@@ -7,14 +7,16 @@ import InputObject from './InputObject';
 import EstimateTime from '../Object/EstimateTime';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Picker} from '@react-native-picker/picker';
 
 console.log("hello world!")
 
 const Today = ({ navigation }) => {
+  let f = new Date().toLocaleDateString();
+
   const {dispatch,state} = useCtx();
-  console.log(state)
-  const [selectedLanguage, setSelectedLanguage] = useState();
+  console.log('---------')
+  console.log(state.DailyObject)
+  console.log('--------')
 
   const [idx,setIdx]=useState(0);
   const initialState=[];
@@ -58,7 +60,6 @@ const Today = ({ navigation }) => {
   }
   const plusObject=()=>{
     dispatch({type:'PlusObject'})
-    setObject(prev=>[...prev,'먹표'])
   }
 
   const renderMemo=({item})=>{
@@ -78,9 +79,9 @@ const Today = ({ navigation }) => {
     console.log(item.object)
     if(state.screen.objectProceeding===item.id){
       return(
-        <View style={{ marginTop:1,paddingTop:3,paddingBottom:3,flex:1,flexDirection:'row' ,backgroundColor:'#64DB99'}}>      
+        <View style={{ marginTop:1,paddingTop:3,paddingBottom:3,flex:2,flexDirection:'row' ,backgroundColor:`${item.list}`}}>      
           <TouchableOpacity style={{flex:8}}onPress={()=>chooseObject(item.id)}>
-            <Text style={{flex:8, width:'100%',paddingLeft:4}}>{item.object}</Text>
+            <Text style={{flex:8, fontSize:18,width:'100%',paddingLeft:4}}>{item.object}</Text>
           </TouchableOpacity>
           <TouchableOpacity style ={{flex:1, padding:1}} onPress={()=>deleteObject()}>
             <Text>X</Text>
@@ -92,7 +93,7 @@ const Today = ({ navigation }) => {
       )
     } else{
         return(
-          <View style={{flex:1,flexDirection:'row' ,paddingTop:3,paddingBottom:3,borderBottomWidth:1,borderBottomColor:'#efefef'}}>      
+          <View style={{flex:1,flexDirection:'row' ,backgroundColor:`${item.list}`,paddingTop:3,paddingBottom:3,borderBottomWidth:1,borderBottomColor:'#efefef'}}>      
             <TouchableOpacity style={{width:'100%'}} onPress={()=>chooseObject(item.id)}>
               <Text style={{flex:8}}>{item.object}</Text>
             </TouchableOpacity>
@@ -128,7 +129,9 @@ const Today = ({ navigation }) => {
           <Text>Today's todo list</Text>
           <TouchableOpacity onPress={()=>navigation.navigate('InputObject')}><Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'lightblue',color:'white',fontWeight:'800'}}>추가하기</Text></TouchableOpacity>
           <TouchableOpacity onPress={()=>timeStart()}><Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'red',color:'white',fontWeight:'800'}}>시작하기</Text></TouchableOpacity>
-          <FlatList data={state.DailyObject} renderItem={renderobject} />
+          
+          {state.DailyObject===null?<></>:
+          <FlatList data={state.DailyObject[`${f}`]} renderItem={renderobject} />}
           <Text>메모</Text>
         </View>
         <View style ={{flex:1,flexDirection:'row'}}>
@@ -140,7 +143,10 @@ const Today = ({ navigation }) => {
           </View>
           <View style = {{flex:5, flexDirection:'column',backgroundColor:"white"}}>
             <Text style ={{backgroundColor:"red"}}>실제</Text>
-            <FlatList data={state.DailyObject} renderItem={renderMemo} />
+            {/* {state.DailyObject.f.length===0?
+            <></>:
+            <FlatList data={state.DailyObject[`${f}`]} renderItem={renderMemo} />
+            } */}
           </View> 
         </View>
       </View>
