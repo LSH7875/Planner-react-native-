@@ -113,7 +113,14 @@ const Today = ({ navigation }) => {
 
   //시간 측정하는 함수
   const timeStart =()=>{
-
+    let currentTime = parseInt(Date.now()/(1000*60));
+    // let e = parseInt(new Date(f).getTime()/(1000*60));
+    let dayStartTime = new Date(f).getTime()/(1000*60);
+    let dayEndTime = dayStartTime+1440;
+    let top = (currentTime-dayStartTime)/1440;
+    let bottom = (dayEndTime-currentTime)/1440;
+    console.log(top,bottom)
+    dispatch({type:'timeStart',payload:state.screen.objectProceeding})
   }
   
   return (
