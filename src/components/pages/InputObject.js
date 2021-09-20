@@ -56,8 +56,8 @@ function close() {
                     <Picker.Item  label={"검은색"} value="#111111" /> */}
 
                 {state.list.map((v)=>{
-                    console.log('map에서 샐깔')
-                    console.log(Object.values(v));
+                    // console.log('map에서 샐깔')
+                    // console.log(Object.values(v));
                     return(
                     <Picker.Item label={`${Object.keys(v)}`} value={`${Object.values(v)}`} />
                 )} )}
