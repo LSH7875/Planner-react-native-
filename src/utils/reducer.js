@@ -20,15 +20,41 @@ const reducer = (state, action) => {
                 ...state,DailyObject:dailyObject,screen:{...state.screen,popup:0}
             }
         case 'timeStart':
+            console.log('timestart누를때')
+            console.log(state)
+            //아무목표도 정해지지 않았을 때 그냥 반환
+            if(state.screen.objectProceeding==null) return {...state}
+            //목표가 정해졌을 때 start
             let today = new Date().toLocaleDateString();
-            let todayStartMinute = new Date(f).getTime()/60000;
-            let dailyObjectTime={...state.DailyObject[`${f}`]};
+            let todayStartMinute = new Date(today).getTime()/60000;
+            let stateDailyObject = {...state.DailyObject};
+            let dailyObjectTime=stateDailyObject[`${today}`];
+            let currentTime = parseInt(Date.now()/(1000*60));
+            console.log('이건 세부사항');
+            console.log(stateDailyObject);
             
 
+            dailyObjectTime[state.screen.objectProceeding]={...dailyObjectTime[state.screen.objectProceeding],objStartTime:currentTime,timeClick:1}
+            console.log('어떻게 변했냥')
+            console.log(dailyObjectTime[state.screen.objectProceeding]);
+            console.log('ssssssssss')
+            return {
+                ...state,screen:{...state.screen,Proceeding:1,},
+                DailyObject:{...stateDailyObject}
+            }
+
             // return{...state,DailyObject:{...state.DailyObject,}}
+        
+        case 'timeEnd':
+            // console.log(state.DailyObject);
+            return {...state}
         case 'chooseObject':
-            console.log('오브젝트선택')
-            console.log(action.payload)
+            if(state.screen.Proceeding===1){
+            return {
+                ...state
+            }}
+            // console.log('오브젝트선택')
+            // console.log(action.payload)
             return{
                 ...state,screen:{...state.screen,objectProceeding:action.payload}
             }

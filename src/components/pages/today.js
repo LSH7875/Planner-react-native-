@@ -102,8 +102,6 @@ const Today = ({ navigation }) => {
     }
   }
   const renderTime = ({item})=>{
-    console.log('renderitme')
-    console.log({item})
     return (
       <View style = {{flex:1}}>
         <Text style ={{color:'white',textAlign:'right',}} >{item}</Text> 
@@ -120,9 +118,18 @@ const Today = ({ navigation }) => {
     let top = (currentTime-dayStartTime)/1440;
     let bottom = (dayEndTime-currentTime)/1440;
     console.log(top,bottom)
-    dispatch({type:'timeStart',payload:state.screen.objectProceeding})
+    dispatch({type:'timeStart',payload:state.screen.objectProceeding});
   }
   
+  useEffect(()=>{
+    console.log('상태다옹')
+    console.log(state)
+  },[state])
+const timeEnd=()=>{
+  dispatch({type:'timeEnd'})
+}
+
+
   return (
     <>
       {/* <EstimateTime/> */}
@@ -135,8 +142,21 @@ const Today = ({ navigation }) => {
         <View style ={{flex:1}}>
           <Text>Today's todo list</Text>
           <TouchableOpacity onPress={()=>navigation.navigate('InputObject')}><Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'lightblue',color:'white',fontWeight:'800'}}>추가하기</Text></TouchableOpacity>
+          {state.screen.Proceeding===0?
           <TouchableOpacity onPress={()=>timeStart()}><Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'red',color:'white',fontWeight:'800'}}>시작하기</Text></TouchableOpacity>
-          
+          :
+          (<View style ={{flexDirection:'row'}}>
+            <View style={{flex:1}}>
+              <TouchableOpacity onPress={()=>timePause()}>
+                <Text style ={{flex:1, margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'blue',color:'white',fontWeight:'800'}}>일시정지</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{flex:1}}>
+            <TouchableOpacity onPress={()=>timeEnd()}>
+              <Text style ={{flex:1, margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'green',color:'white',fontWeight:'800'}}>완료</Text>
+            </TouchableOpacity>
+            </View>
+          </View>)}
           {state.DailyObject===null?<></>:
           <FlatList data={state.DailyObject[`${f}`]} renderItem={renderobject} />}
           <Text>메모</Text>

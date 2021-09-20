@@ -11,7 +11,10 @@ export const initialState = {
   Memo:null,//{id/subject/content/index/}
   Project:null,//{id/project/start_date/end_date/status/satisfaction/list/specific/list/memo}
   //sepcific:{specificObj/priority/startDate/endDate/status/memo}
-  screen:{popup:0,objectProceeding:null},//{popup/objectProceeding/time}
+  screen:{popup:0,objectProceeding:null,Proceeding:0},//{popup/objectProceeding/time}
+  //objectProceeding: 선택하는 목표 하나만 가능하게끔 하는 항목
+  //Proceeding:0,1//0이면 아무것도 실행을 안하는 거니까  움직임 가능하게
+  // 1이면 실행을 하는 중이니까 움직이지 못하게 해야함.
   list:[{'직장':'#1e73be'},{'휴식':'#a9e87c'},{'자기계발':'#dd3333'},{'종교':'#bc87f1'},{'기타':'#f1dbbb'}]
 
 };
