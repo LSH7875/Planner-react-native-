@@ -7,13 +7,13 @@ import InputObject from './InputObject';
 import EstimateTime from '../Object/EstimateTime';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import {usePersistedReducer} from '../../utils/usePersistant'
 console.log("hello world!")
 
 const Today = ({ navigation }) => {
   let f = new Date().toLocaleDateString();
-
   const {dispatch,state} = useCtx();
+  // const {dispatch,state} = usePersistedReducer(useCtx());
   console.log('---------')
   console.log(state.DailyObject)
   console.log('--------')
@@ -121,6 +121,11 @@ const Today = ({ navigation }) => {
     dispatch({type:'timeStart',payload:state.screen.objectProceeding});
   }
   
+  const timePause=()=>{
+    dispatch({type:'timePause'})
+  }
+
+
   useEffect(()=>{
     console.log('상태다옹')
     console.log(state)
@@ -148,17 +153,18 @@ const timeEnd=()=>{
           (<View style ={{flexDirection:'row'}}>
             <View style={{flex:1}}>
               <TouchableOpacity onPress={()=>timePause()}>
-                <Text style ={{flex:1, margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'blue',color:'white',fontWeight:'800'}}>일시정지</Text>
+                <Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'blue',color:'white',fontWeight:'800'}}>일시정지</Text>
               </TouchableOpacity>
             </View>
             <View style={{flex:1}}>
             <TouchableOpacity onPress={()=>timeEnd()}>
-              <Text style ={{flex:1, margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'green',color:'white',fontWeight:'800'}}>완료</Text>
+              <Text style ={{margin:4,borderRadius:4,padding:6,textAlign:'center', backgroundColor:'green',color:'white',fontWeight:'800'}}>완료</Text>
             </TouchableOpacity>
             </View>
           </View>)}
           {state.DailyObject===null?<></>:
-          <FlatList data={state.DailyObject[`${f}`]} renderItem={renderobject} />}
+           <FlatList data={state.DailyObject[state.screen.day]} renderItem={renderobject} />}
+          {/* <FlatList data={state.DailyObject[`${f}`]} renderItem={renderobject} />} */}
           <Text>메모</Text>
         </View>
         <View style ={{flex:1,flexDirection:'row'}}>
