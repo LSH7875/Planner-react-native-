@@ -73,6 +73,10 @@ const Today = ({ navigation }) => {
     )
   }
 
+  const deleteObject=()=>{
+    dispatch({type:'deleteObject'})
+  }
+
   //계획
   const renderobject=({item})=>{
     console.log('렌더오브젝트')
@@ -83,8 +87,8 @@ const Today = ({ navigation }) => {
           <TouchableOpacity style={{flex:8}}onPress={()=>chooseObject(item.id)}>
             <Text style={{flex:8, fontSize:18,width:'100%',paddingLeft:4}}>{item.object}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style ={{flex:1, padding:1}} onPress={()=>deleteObject()}>
-            <Text>X</Text>
+          <TouchableOpacity style ={{flex:1, padding:1,backgroundColor:'red'}} onPress={()=>deleteObject()}>
+            <Text style ={{textAlign:'center'}}>X</Text>
           </TouchableOpacity>
         {/* <TouchableOpacity style ={{flex:2 ,margin:2}} backgroundColor="red" onPress={()=>timeStamp()}>
           <Text style={{backgroundColor:'palegreen',textAlign:'center'}}>시작</Text>

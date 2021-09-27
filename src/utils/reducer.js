@@ -70,7 +70,7 @@ const reducer = (state, action) => {
                 }
             }
         case 'timePause':
-            {   console.log('timepause')
+            {  
                 let today = new Date().toLocaleDateString();
                 let currentTime = parseInt(Date.now()/(1000*60));
                 let stateDailyObject = {...state.DailyObject};
@@ -84,6 +84,19 @@ const reducer = (state, action) => {
                     DailyObject:{...stateDailyObject}
                 }
             }    
+        case 'deleteObject':
+            {
+                let today = new Date().toLocaleDateString();
+                let stateDailyObject = {...state.DailyObject};
+                let dailyObjectTime=stateDailyObject[`${today}`];
+                console.log('state.screen.objectProceeding: ',state.screen.objectProceeding)
+                dailyObjectTime.splice(state.screen.objectProceeding,1)
+                console.log('deleteObject');
+                return{
+                    ...state,
+                    DailyObject:{...stateDailyObject}
+                }
+            }
         case 'chooseObject':
             if(state.screen.Proceeding===1){
             return {
