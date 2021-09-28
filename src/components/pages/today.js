@@ -8,11 +8,22 @@ import EstimateTime from '../Object/EstimateTime';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {usePersistedReducer} from '../../utils/usePersistant'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 console.log("hello world!")
 
 const Today = ({ navigation }) => {
   let f = new Date().toLocaleDateString();
   const {dispatch,state} = useCtx();
+
+  useEffect(async()=>{
+    console.log('useEffectplannerWing')
+    AsyncStorage.setItem('@plannerWing',JSON.stringify(state))
+    console.log('저장이 잘 되었는가')
+    result = await AsyncStorage.getItem('@plannerWing')
+    console.log('아이템 갖고오나')
+    console.log(JSON.parse(result))
+  },[state])
+
   // const {dispatch,state} = usePersistedReducer(useCtx());
   console.log('---------')
   console.log(state.DailyObject)
