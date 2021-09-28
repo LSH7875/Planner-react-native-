@@ -107,6 +107,14 @@ const reducer = (state, action) => {
             return{
                 ...state,screen:{...state.screen,objectProceeding:action.payload}
             }
+        case 'getItem':{
+            console.log('==========')
+            console.log(action.payload)
+            return {
+                ...state
+            }
+        }
+            
         default:
             return state;
     }

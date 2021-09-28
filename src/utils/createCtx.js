@@ -20,13 +20,13 @@ export const initialState = {
 };
 
 const createCtx = () => {
+  // result = await AsyncStorage.getItem('@plannerWing');
   const ctx = React.createContext(initialState);
   const useCtx = (Ctx=ctx) => {
     const c = (React.useContext(Ctx));
     // const c = usePersistedContext(React.useContext(Ctx));
     return c;
   };
-
   return [useCtx, ctx.Provider];
 };
 //원래는 Context.provider로 만든건데 여기서는 ctx.Provider로 만든거임.
