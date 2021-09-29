@@ -1,5 +1,12 @@
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'getItem':{
+            console.log('==========')
+            console.log(action.payload)
+            return {
+                ...action.payload
+            }
+        } 
         case 'PlusObject':
             return {
             ...state,screen:{...state.screen,popup:1}
