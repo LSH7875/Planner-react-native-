@@ -14,7 +14,12 @@ console.log("hello world!")
 const Today = ({ navigation }) => {
   let f = new Date().toLocaleDateString();
   const {dispatch,state} = useCtx();
-
+  useEffect(async()=>{
+    AsyncStorage.getItem('@plannerWing')
+      .then(value=>{
+        dispatch({type:'getItem',payload:JSON.parse(value)})  
+      })
+    },[])
   useEffect(async()=>{
     console.log('useEffectplannerWing')
     AsyncStorage.setItem('@plannerWing',JSON.stringify(state))

@@ -1,7 +1,8 @@
 // Context 생성하기
-import React from 'react';
+import React,{useState} from 'react';
 import {usePersistedContext} from '../utils/usePersistant'
 import {today} from '../components/Hooks/time'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const initialState = {
   DailyObject:null,//{id/object/priority/satus/startDate/endDate/objStartTime/objEndTime/Timelist/list}
   Schedule:null,//{id/schedule/start/end/list/alram}
@@ -19,14 +20,14 @@ export const initialState = {
 
 };
 
-const createCtx = () => {
-  const ctx = React.createContext(initialState);
+const createCtx = () => {  
+  const ctx=React.createContext(initialState);
+  
   const useCtx = (Ctx=ctx) => {
     const c = (React.useContext(Ctx));
     // const c = usePersistedContext(React.useContext(Ctx));
     return c;
   };
-
   return [useCtx, ctx.Provider];
 };
 //원래는 Context.provider로 만든건데 여기서는 ctx.Provider로 만든거임.

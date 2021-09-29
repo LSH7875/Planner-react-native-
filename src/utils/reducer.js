@@ -4,7 +4,7 @@ const reducer = (state, action) => {
             console.log('==========')
             console.log(action.payload)
             return {
-                ...state
+                ...action.payload
             }
         } 
         case 'PlusObject':
