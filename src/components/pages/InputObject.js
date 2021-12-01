@@ -47,6 +47,7 @@ function close() {
         <View style = {{flex:1,width:'100%',height:'100%',backgroundColor:'#ececec',padding:'2%'}}>
             <Text style={{width:'100%', borderBottomColor:'skyblue',borderBottomWidth:1, textAlign:'center', padding:10}}>목표를 입력하세요</Text>
             <Picker
+                style={{color:"black"}}
                 ref={pickerRef}
                 selectedValue={selectedLanguage}
                 onValueChange={(itemValue, itemIndex) =>
@@ -59,12 +60,12 @@ function close() {
                     // console.log('map에서 샐깔')
                     // console.log(Object.values(v));
                     return(
-                    <Picker.Item label={`${Object.keys(v)}`} value={`${Object.values(v)}`} />
+                    <Picker.Item style={{color:"white"}} label={`${Object.keys(v)}`} value={`${Object.values(v)}`} />
                 )} )}
             </Picker>
 
             <TextInput
-                style={{borderRadius:0,height: '80%',flexShrink:1,width:'80%',marginRight:'auto',marginLeft:'auto'}}
+                style={{borderRadius:0,height: '80%',flexShrink:1,width:'80%',marginRight:'auto',marginLeft:'auto',color:'black'}}
                 placeholder="오늘의 목표를 입력하세요"
                 onChangeText={text => setText(text)}
                 defaultValue={text}
